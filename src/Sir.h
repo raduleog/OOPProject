@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "Sir.cpp"
+using namespace std;
+
 
 template <typename T>
 class Sir {
@@ -21,7 +22,7 @@ class Sir {
         
         bool operator==(const Sir<T>& sir) const; // Verifica daca doua siruri sunt identitice
         bool operator<(const Sir<T>& sir) const; 
-        bool operator<(const Sir<T>& sir) const;
+        bool operator>(const Sir<T>& sir) const;
         bool operator<=(const Sir<T>& sir) const;
         bool operator>=(const Sir<T>& sir) const;
         
@@ -29,3 +30,5 @@ class Sir {
         void print() const; // printeaza sirul
         
 };
+
+#include "Sir.cpp"
