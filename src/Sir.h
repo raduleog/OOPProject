@@ -1,5 +1,9 @@
 #pragma once
 
+#include <iostream>
+#include <stdexcept>
+#include "Sir.cpp"
+
 template <typename T>
 class Sir {
     private:
@@ -13,9 +17,15 @@ class Sir {
         ~Sir(); // Elibereaza memoria
 
         Sir<T>& operator=(const Sir<T>& sir); // a = b -> copiaza continutul lui b in a
+        operator T() const; // conversie la T (primul element)
+        
         bool operator==(const Sir<T>& sir) const; // Verifica daca doua siruri sunt identitice
-
+        bool operator<(const Sir<T>& sir) const; 
+        bool operator<(const Sir<T>& sir) const;
+        bool operator<=(const Sir<T>& sir) const;
+        bool operator>=(const Sir<T>& sir) const;
+        
         int size() const; // Returneaza dimensiunea sirului
-        void print(std::ostream& out) const; // printeaza sirul
+        void print() const; // printeaza sirul
         
 };
