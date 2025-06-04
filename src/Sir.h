@@ -25,6 +25,9 @@ class Sir {
         bool operator>(const Sir<T>& sir) const;
         bool operator<=(const Sir<T>& sir) const;
         bool operator>=(const Sir<T>& sir) const;
+        bool operator+(const Sir<T>& sir) const; // Concateneaza două siruri
+        bool operator-(const Sir<T>& sir) const; // verifica daca exista prefix intre doua siruri, si in caz afirmativ il elimina (întoarce şirul obţinut prin ştergerea şirului "scazator" din "descăzut", dacă "scăzătorul" este prefix al "descăzutului", altfel întoarce "descăzutul" neschimbat)
+        bool operator*(const Sir<T>& sir) const; // întoarce şirul elementelor care ocupă aceeaşi poziţie şi coincid în cele două şiruri
         
         int size() const; // Returneaza dimensiunea sirului
         void print() const; // printeaza sirul
