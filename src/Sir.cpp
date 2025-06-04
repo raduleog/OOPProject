@@ -113,6 +113,9 @@ bool Sir<T>::operator>=(const Sir<T>& sir) const{
 
     return false;
 }
+
+
+
 // Size
 template <typename T>
 int Sir<T>::size() const {
@@ -128,4 +131,70 @@ void Sir<T>::print() const {
         if (i < length - 1) std::cout << ", ";
     }
     std::cout << "]" << std::endl;
+}
+
+// Operatorul + concatenare
+template <typename T>
+Sir<T> Sir<T>::operator+(const Sir<T>& sir) const {
+    int newLength = length + sir.length;
+    T* newData = new T[newLength];
+
+    // Copiez elementele din primul sir
+    for (int i = 0; i < length; i++) {
+        newData[i] = data[i];
+    }
+
+    // Copiez elementele din al doilea sir
+    for (int i = 0; i < sir.length; i++) {
+        newData[length + i] = sir.data[i];
+    }
+
+    Sir<T> result(newData, newLength);
+    delete[] newData; // Eliberez memoria temporară
+    return result;
+}
+
+// Operatorul * întoarce şirul elementelor care ocupă aceeaşi poziţie şi coincid în cele două şiruri
+
+template <typename T>
+Sir<T> Sir<T>::operator*(const Sir<T>& sir) const {
+    int minLength = (length < sir.length) ? length : sir.length; //aflam lungimea celui mai mic sir folosind o comparatie simpla cu operator ternar
+    T* commonData = new T[minLength]; // stocam temporar elementele comune intr un vector de lungimea min length aflata anterior
+    int commonCount = 0; //counter pentru elemente comune
+
+//parcurgem si comparam sirurile si stocam elementele comune
+    for (int i = 0; i < minLength; i++) {
+        if (data[i] == sir.data[i]) {
+            commonData[commonCount++] = data[i];
+        }
+    }
+    // rezultatul apartine unui sir cu
+    Sir<T> result(commonData, commonCount);
+    delete[] commonData; 
+    return result;
+}
+
+
+//Operatorul - elimina prefixul, daca exista
+template <typename T>
+Sir<T> Sir<T>::operator-(const Sir<T>& sir) const {
+    if (sir.length > length) //pentru a fi prefix, sirul trebuie sa aiba o lungime mai mica 
+        return *this;
+    
+    for (int i = 0; i < sir.length; ++i) // parcurgem elementele
+    {
+    if (data[i] != sir.data[i]) //este prefix daca nu contine elemente diferite
+     return *this; 
+    }
+
+    int newLength = length - sir.length; // câte elemente rămân după eliminarea prefixului
+    T* newData = new T[newLength];
+
+    for (int i = 0; i < newLength; ++i) //parcurgem elementele ramase dupa prefix
+    {
+        newData[i] = data[sir.length + i]; // pentru "eliminare", începem de la poziția imediat după prefix
+    }
+    Sir<T> result(newData, newLength); //noul sir
+    delete[] newData;
+    return result; // Returnăm noul șir
 }
