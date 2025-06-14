@@ -1,0 +1,22 @@
+# Fisiere binare generate
+*.exe
+*.o
+*.obj
+*.dll
+*.pdb
+
+# Director build (daca il creezi)
+build/
+
+# Fisiere VSCode locale
+.vscode/
+
+# Fisiere temporare ale sistemului
+*.log
+*.tmp
+*.cache
+
+# Fisiere swap sau backup
+*~
+*.swp
+*.bak

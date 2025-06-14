@@ -17,6 +17,15 @@ Sir<T>::Sir(const T* arr, int len){
         data[i] = arr[i];
 }
 
+// Constructor care creează un șir cu un singur element, egal cu cel dat.
+// Permite conversia implicită de la un tip de bază (ex. int, char) la Sir<T>.
+template <typename T>
+Sir<T>::Sir(T elem) {
+    length = 1;
+    data = new T[1];
+    data[0] = elem;
+}
+
 // Copiere -> a = b
 template <typename T>
 Sir<T>::Sir(const Sir<T>& sir){
@@ -197,4 +206,40 @@ Sir<T> Sir<T>::operator-(const Sir<T>& sir) const {
     Sir<T> result(newData, newLength); //noul sir
     delete[] newData;
     return result; // Returnăm noul șir
+}
+
+//Operatorul << elimina n elemente de la inceputul sirului
+template <typename T>
+Sir<T> Sir<T>::operator<<(int n) const {
+    if(n >= length){
+        return Sir<T>(); //returneaza un sir gol in cazul in care numar de elemente care trebuie sterse sunt mai multe decat numarul de elemente din sir
+    }
+    int newLength = length - n; // cate elemente raman dupa eliminarea primelor n elemente
+    T* newData = new T[newLength];
+
+    for(int i = 0; i < newLength; ++i){
+        newData[i] = data[n+i];
+    }
+
+    Sir<T> result(newData, newLength); // noul sir
+    delete[] newData; // eliberare memorie
+    return result;
+}
+
+//Operatorul >> elimina n elemente de la sfarsitul sirului
+template <typename T>
+Sir<T> Sir<T>::operator>>(int n) const {
+    if(n >= length){
+        return Sir<T>();  //returneaza un sir gol in cazul in care numar de elemente care trebuie sterse sunt mai multe decat numarul de elemente din sir
+    }
+    int newLength = length - n; // cate elemente raman dupa eliminarea ultimelor n elemente
+    T* newData = new T[newLength];
+
+    for(int i = 0; i < newLength; ++i){
+        newData[i] = data[i];
+    }
+
+    Sir<T> result(newData, newLength); // noul sir
+    delete[] newData; //eliberare memorie
+    return result;
 }
